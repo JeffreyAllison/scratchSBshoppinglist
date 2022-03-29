@@ -1,7 +1,42 @@
+/* eslint-disable no-console */
 const SUPABASE_URL = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxyYnpocGxkanJ4cWtqc2tjaXpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDc1NTIwMDMsImV4cCI6MTk2MzEyODAwM30.idE1m2ehmckSIic7mOSaXFl1McMzBdIrhU_Vrsr6UyI';
 const SUPABASE_KEY = 'https://lrbzhpldjrxqkjskcizc.supabase.co';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+export async function getShoppingList () {
+  const response = await client
+    .from('shopping_list_items')
+    .select('*');
+
+  return checkError(response);
+}
+
+export async function createItem (listItem) {
+  const response = await client
+    .from('shopping_list_items')
+    .insert(listItem);
+
+  return checkError(response);
+}
+
+export async function deleteShoppingList (id) {
+  const response = await client
+    .from('shopping_list_items')
+    .delete()
+    .match({ id });
+
+  return checkError(response);
+}
+
+export async function purchaseItem (id) {
+  const response = await client
+    .from('shopping_list_items')
+    .update({ purchased: true })
+    .match({ id });
+
+  return checkError(response);
+}
 
 export function getUser () {
   return client.auth.session() && client.auth.session().user;
@@ -37,6 +72,6 @@ export async function logout () {
   return (window.location.href = '../');
 }
 
-// function checkError({ data, error }) {
-//     return error ? console.error(error) : data;
-// }
+function checkError ({ data, error }) {
+  return error ? console.error(error) : data;
+}
