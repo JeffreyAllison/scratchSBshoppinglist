@@ -4,6 +4,27 @@ const SUPABASE_KEY = 'https://lrbzhpldjrxqkjskcizc.supabase.co';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+export async function createItem (listItem) {
+  const response = await client
+    .from('shopping_list_items')
+    .insert({
+      item: listItem,
+      completed: false,
+      user_id: client.auth.user().id
+    });
+
+  return checkError(response);
+}
+
+export async function deleteShoppingList () {
+  const response = await client
+    .from('shopping_list_items')
+    .delete()
+    .match({ user_id: client.auth.user().id });
+
+  return checkError(response);
+}
+
 export async function getShoppingList () {
   const response = await client
     .from('shopping_list_items')
@@ -12,27 +33,10 @@ export async function getShoppingList () {
   return checkError(response);
 }
 
-export async function createItem (listItem) {
+export async function buyItem (id) {
   const response = await client
     .from('shopping_list_items')
-    .insert(listItem);
-
-  return checkError(response);
-}
-
-export async function deleteShoppingList (id) {
-  const response = await client
-    .from('shopping_list_items')
-    .delete()
-    .match({ id });
-
-  return checkError(response);
-}
-
-export async function purchaseItem (id) {
-  const response = await client
-    .from('shopping_list_items')
-    .update({ purchased: true })
+    .update({ completed: true })
     .match({ id });
 
   return checkError(response);

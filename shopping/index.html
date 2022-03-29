@@ -15,21 +15,21 @@
 
 <body>
   <header>
-    <div class="gutter-right logo">
-      <img src="../assets/big-logo.png" />
+    <div class="loading-spinner invisible">
+      <span id="loading-text">Loading shopping list...</span>
     </div>
   </header>
-  <button id="logout">Logout</button>
-  <main>
-    <button id="delete-list">Delete shopping list</button>
+  <h3>Shopping List</h3>
+  <main class="list-main">
+    <button id="logout">Logout</button>
     <form class="list-item-form">
-      <input placeholder="2" type="number" />
-      <input placeholder="apples" />
+      <input placeholder="apples" name="item" required />
       <button>Add shopping list item</button>
     </form>
-    <section>
+    <button class="delete-list">Delete shopping list</button>
+    <div class="items-list">
 
-    </section>
+    </div>
   </main>
   <footer>
     <div class="copy gutter-right">&copy; 2021 Alchemy Code Lab</div>
