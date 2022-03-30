@@ -1,15 +1,15 @@
 /* eslint-disable no-console */
-const SUPABASE_URL = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxyYnpocGxkanJ4cWtqc2tjaXpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDc1NTIwMDMsImV4cCI6MTk2MzEyODAwM30.idE1m2ehmckSIic7mOSaXFl1McMzBdIrhU_Vrsr6UyI';
-const SUPABASE_KEY = 'https://lrbzhpldjrxqkjskcizc.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxyYnpocGxkanJ4cWtqc2tjaXpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDc1NTIwMDMsImV4cCI6MTk2MzEyODAwM30.idE1m2ehmckSIic7mOSaXFl1McMzBdIrhU_Vrsr6UyI';
+const SUPABASE_URL = 'https://lrbzhpldjrxqkjskcizc.supabase.co';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-export async function createItem (listItem) {
+export async function createItem (item) {
   const response = await client
     .from('shopping_list_items')
     .insert({
-      item: listItem,
-      completed: false,
+      item: item,
+      complete: false,
       user_id: client.auth.user().id
     });
 
@@ -36,7 +36,7 @@ export async function getShoppingList () {
 export async function buyItem (id) {
   const response = await client
     .from('shopping_list_items')
-    .update({ completed: true })
+    .update({ complete: true })
     .match({ id });
 
   return checkError(response);

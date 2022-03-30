@@ -13,7 +13,7 @@ checkAuth();
 
 const itemsListEl = document.querySelector('.items-list');
 const listItemForm = document.querySelector('.list-item-form');
-const logoutButton = document.getElementById('#logout');
+const logoutButton = document.getElementById('logout');
 const deleteButton = document.querySelector('.delete-list');
 const loadingEl = document.querySelector('.loading-spinner');
 
@@ -23,10 +23,9 @@ listItemForm.addEventListener('submit', async (e) => {
 
   const data = new FormData(listItemForm);
 
-  await createItem({
-    item: data.get('item'),
-    completed: false,
-  });
+  const item = data.get('item');
+
+  await createItem(item);
 
   listItemForm.reset();
 
