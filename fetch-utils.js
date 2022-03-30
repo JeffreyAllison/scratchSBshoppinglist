@@ -16,7 +16,7 @@ export async function createItem (item) {
   return checkError(response);
 }
 
-export async function deleteShoppingList () {
+export async function deleteAllItems () {
   const response = await client
     .from('shopping_list_items')
     .delete()

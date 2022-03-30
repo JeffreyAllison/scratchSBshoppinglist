@@ -4,7 +4,7 @@ import {
   buyItem,
   getShoppingList,
   logout,
-  deleteShoppingList,
+  deleteAllItems,
 
 } from '../fetch-utils.js';
 import { renderItem } from '../render-utils.js';
@@ -66,6 +66,6 @@ logoutButton.addEventListener('click', () => {
 });
 
 deleteButton.addEventListener('click', async () => {
-  await deleteShoppingList();
+  await deleteAllItems();
   await fetchAndDisplayItems();
 });
