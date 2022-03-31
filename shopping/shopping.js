@@ -24,8 +24,9 @@ listItemForm.addEventListener('submit', async (e) => {
   const data = new FormData(listItemForm);
 
   const item = data.get('item');
+  const amount = data.get('amount');
 
-  await createItem(item);
+  await createItem(item, amount);
 
   listItemForm.reset();
 

@@ -4,11 +4,12 @@ const SUPABASE_URL = 'https://lrbzhpldjrxqkjskcizc.supabase.co';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-export async function createItem (item) {
+export async function createItem (item, amount) {
   const response = await client
     .from('shopping_list_items')
     .insert({
       item: item,
+      amount: amount,
       complete: false,
       user_id: client.auth.user().id
     });
