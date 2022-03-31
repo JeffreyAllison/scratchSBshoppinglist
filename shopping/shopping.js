@@ -43,6 +43,9 @@ async function fetchAndDisplayItems () {
   for (let item of items) {
     const itemEl = renderItem(item);
 
+    itemEl.classList.add('list-item');
+    itemEl.textContent = `${item.amount} ${item.item}`;
+
     itemEl.addEventListener('click', async () => {
       await buyItem(item.id);
 
